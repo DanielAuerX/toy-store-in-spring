@@ -41,7 +41,7 @@ public class ToyController {
     @PostMapping
     public ResponseEntity<String> addToy(@RequestBody ToyRequest request) {
         try {
-            AbstractToy toy = ToyFactory.create(request.classType(), UUID.fromString(request.uuid()), request.name(),
+            AbstractToy toy = ToyFactory.create(request.classType(), request.name(),
                     ToySize.valueOf(request.size()), request.producerId(), request.numberOfWheels());
         toyRepository.save(toy);
         return ResponseEntity.ok("The toy has been added!");

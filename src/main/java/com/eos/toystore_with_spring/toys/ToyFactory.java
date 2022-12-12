@@ -6,8 +6,9 @@ import java.util.UUID;
 
 public class ToyFactory {
 
-    public static AbstractToy create(String classType, UUID uuid, String name, ToySize size, int producerId, int numberOfWheels) {
+    public static AbstractToy create(String classType, String name, ToySize size, int producerId, int numberOfWheels) {
         AbstractToy toy;
+        UUID uuid = UUID.randomUUID();
         try {
             if (numberOfWheels != 0) {
                 Class[] classArguments = new Class[]{UUID.class, String.class, ToySize.class, int.class, int.class};

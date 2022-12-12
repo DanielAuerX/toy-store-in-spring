@@ -61,10 +61,8 @@ class ToyControllerTestUnitTests {
 
     @Test
     void addToy_withCorrectData() {
-        String uuid = UUID.randomUUID().toString();
         ToyController toyController = new ToyController(mockedToyRepository);
-        ToyRequest request = new ToyRequest("Car", uuid,
-                "Speedo", "S", 1, 4);
+        ToyRequest request = new ToyRequest("Car", "Speedo", "S", 1, 4);
 
         ResponseEntity<String> actual = toyController.addToy(request);
 
@@ -73,10 +71,9 @@ class ToyControllerTestUnitTests {
 
     @Test
     void addToy_withNonExistingToyType() {
-        String uuid = UUID.randomUUID().toString();
         ToyController toyController = new ToyController(mockedToyRepository);
         String nonExistingToyType = "Tasse";
-        ToyRequest request = new ToyRequest(nonExistingToyType, uuid,
+        ToyRequest request = new ToyRequest(nonExistingToyType,
                 "Speedo", "S", 1, 4);
         ResponseEntity<String> expected = ResponseEntity.badRequest().body("Something went wrong :(\nCheck if you entered the correct parameters.");
 
@@ -92,9 +89,8 @@ class ToyControllerTestUnitTests {
 
     @Test
     void updateCustomer_IncorrectIdShouldReturnFalse() {
-        UUID uuid = UUID.randomUUID();
         ToyController toyController = new ToyController(mockedToyRepository);
-        ToyRequest request = new ToyRequest("Car", uuid.toString(),
+        ToyRequest request = new ToyRequest("Car",
                 "Ford Focus", "XL", 1, 4);
 
         ResponseEntity<Boolean> actual = toyController.updateToy(UUID.randomUUID(), request);
@@ -106,7 +102,7 @@ class ToyControllerTestUnitTests {
     @Test
     void updateCustomer_CorrectIdShouldReturnTrue() {
         UUID uuid = UUID.randomUUID();
-        ToyRequest request = new ToyRequest("Car", uuid.toString(),
+        ToyRequest request = new ToyRequest("Car",
                 "Ford Focus", "XL", 1, 4);
         Car car = new Car(uuid, "Ford GT40", ToySize.L, 1, 4);
         when(mockedToyRepository.findById(uuid)).thenReturn(Optional.of(car));
