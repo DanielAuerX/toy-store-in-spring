@@ -1,7 +1,9 @@
 package com.eos.toystore_with_spring.toys;
 
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -39,7 +41,7 @@ public class ToyController {
 
 
     @PostMapping
-    public ResponseEntity<String> addToy(@RequestBody ToyRequest request) {
+    public ResponseEntity<String> addToy(@Valid @NonNull @RequestBody ToyRequest request) {
         try {
             AbstractToy toy = ToyFactory.create(request.classType(), request.name(),
                     ToySize.valueOf(request.size()), request.producerId(), request.numberOfWheels());
@@ -58,7 +60,7 @@ public class ToyController {
 
     @PutMapping("update/{toyId}")
     public ResponseEntity<Boolean> updateToy(@PathVariable("toyId") UUID uuid,
-                             @RequestBody ToyRequest request){
+                                             @Valid @NonNull @RequestBody ToyRequest request){
         Optional<AbstractToy> customerOptional = toyRepository.findById(uuid);
         if (customerOptional.isPresent()){
             AbstractToy toy = customerOptional.get();

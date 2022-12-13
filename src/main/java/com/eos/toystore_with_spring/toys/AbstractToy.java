@@ -2,6 +2,7 @@ package com.eos.toystore_with_spring.toys;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.springframework.lang.NonNull;
 
 import java.util.UUID;
 

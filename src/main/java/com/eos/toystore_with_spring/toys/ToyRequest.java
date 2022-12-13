@@ -1,8 +1,11 @@
 package com.eos.toystore_with_spring.toys;
 
-public record ToyRequest(String classType,
-                         String name,
-                         String size,
-                         int producerId,
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.lang.NonNull;
+
+public record ToyRequest(@NotBlank String classType,
+                         @NotBlank String name,
+                         @NotBlank String size,
+                         @NonNull int producerId,
                          int numberOfWheels) {
 }
