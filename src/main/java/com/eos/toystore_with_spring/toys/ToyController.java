@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/toys")
+@CrossOrigin
 public class ToyController {
     private final ToyRepository toyRepository;
 
