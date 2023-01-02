@@ -47,7 +47,7 @@ public class ToyController {
             AbstractToy toy = ToyFactory.create(request.classType(), request.name(),
                     ToySize.valueOf(request.size()), request.producerId(), request.numberOfWheels());
         toyRepository.save(toy);
-        return ResponseEntity.ok("The toy has been added!");
+        return ResponseEntity.ok("The toy with the id "+toy.getUuid()+" has been added!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Something went wrong :(\nCheck if you entered the correct parameters.");
         }
@@ -76,7 +76,7 @@ public class ToyController {
         }
     }
 
-    //update only the name:
+    //updates the name only:
     @PutMapping("/update/name/{toyId}")
     public ResponseEntity<Boolean> updateToyName(@PathVariable("toyId") UUID uuid, @RequestParam(value = "name") String name){
         Optional<AbstractToy> toyOptional = toyRepository.findById(uuid);
